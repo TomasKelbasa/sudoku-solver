@@ -113,8 +113,7 @@ namespace Sudoku
                 itterations++;
                 if (++unknown[current] > 9)
                 {
-                    unknown[current] = 0;
-                    current--;
+                    unknown[current--] = 0;
                 }
                 else
                 {
@@ -136,7 +135,7 @@ namespace Sudoku
                         if(NumCopy.SelectMany(row => row).Count(value => value == 0) == 0)
                         {
                             Numbers = NumCopy;
-                            Console.WriteLine("Number of itterations: " + itterations);
+                            Console.WriteLine("\nNumber of itterations: " + itterations);
                             return true;
                         }
                         else
@@ -162,15 +161,17 @@ namespace Sudoku
             return kopie;
         }
 
-        public void PrintNumbers()
+        public static void PrintNumbers(List<List<int>> num)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
             int a = -1;
-            foreach(var v in Numbers)
+            foreach(var v in num)
             {
                 a++;
                 if(a%3 == 0)
                 {
-                    Console.WriteLine("---------------------");
+                    Console.WriteLine("                      ");
                 }
                 int b = 2;
                 foreach (var n in v)
@@ -178,26 +179,23 @@ namespace Sudoku
                     b++;
                     if(b%3 == 0)
                     {
-                        Console.Write("|");
+                        Console.Write("  ");
                     }
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write(n + " ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor= ConsoleColor.White;
                 }
-                Console.Write("|");
+                Console.Write(" ");
                 Console.WriteLine();
             }
-            Console.WriteLine("---------------------");
+            Console.WriteLine("                 ");
         }
 
-        public static void PrintNumbers(List<List<int>> num)
+        public void PrintNumbers()
         {
-            foreach (var v in num)
-            {
-                foreach (var n in v)
-                {
-                    Console.Write(n + " ");
-                }
-                Console.WriteLine();
-            }
+            PrintNumbers(Numbers);
         }
     }
 }
