@@ -107,8 +107,10 @@ namespace Sudoku
                 unknown.Add(0);
             }
             int current = 0;
+            int itterations = 0;
             while (true)
             {
+                itterations++;
                 if (++unknown[current] > 9)
                 {
                     unknown[current] = 0;
@@ -134,6 +136,7 @@ namespace Sudoku
                         if(NumCopy.SelectMany(row => row).Count(value => value == 0) == 0)
                         {
                             Numbers = NumCopy;
+                            Console.WriteLine("Number of itterations: " + itterations);
                             return true;
                         }
                         else
@@ -161,14 +164,28 @@ namespace Sudoku
 
         public void PrintNumbers()
         {
+            int a = -1;
             foreach(var v in Numbers)
             {
+                a++;
+                if(a%3 == 0)
+                {
+                    Console.WriteLine("---------------------");
+                }
+                int b = 2;
                 foreach (var n in v)
                 {
+                    b++;
+                    if(b%3 == 0)
+                    {
+                        Console.Write("|");
+                    }
                     Console.Write(n + " ");
                 }
+                Console.Write("|");
                 Console.WriteLine();
             }
+            Console.WriteLine("---------------------");
         }
 
         public static void PrintNumbers(List<List<int>> num)

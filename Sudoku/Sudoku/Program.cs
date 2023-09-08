@@ -2,13 +2,14 @@
 using Sudoku;
 
 Console.WriteLine("Hello, World!");
-Sudoku.Sudoku.PrintNumbers(Sudoku.Sudoku.GetSudokuFromFile(@"C:\Users\tomas\Desktop\Sudoku_example.txt"));
 
-Sudoku.Sudoku s = new Sudoku.Sudoku(Sudoku.Sudoku.GetSudokuFromFile(@"C:\Users\tomas\Desktop\Sudoku_example.txt"));
+Sudoku.Sudoku s = new Sudoku.Sudoku(Sudoku.Sudoku.GetSudokuFromFile(@"C:\Users\tomas\Desktop\Hard sudoku.txt"));
+s.PrintNumbers();
 
 var start = DateTime.Now;
-Console.WriteLine(s.Solve());
+s.Solve();
 var finish = DateTime.Now;
-Console.WriteLine("Finished in: " + (finish - start).TotalSeconds);
+Console.WriteLine("\nFinished in: " + (finish - start).TotalMilliseconds + " ms");
+Console.WriteLine("Solved Sudoku: ");
 
 s.PrintNumbers();

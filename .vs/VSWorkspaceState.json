@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Sudoku",
+    "\\Sudoku\\Sudoku"
   ],
-  "SelectedNode": "\\C:\\Users\\tomas\\Source\\Repos\\sudoku-solver",
+  "SelectedNode": "\\Sudoku\\Sudoku.sln",
   "PreviewInSolutionExplorer": false
 }
