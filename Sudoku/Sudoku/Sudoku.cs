@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Sudoku
@@ -11,22 +12,21 @@ namespace Sudoku
 
         public List<List<int>> Numbers { get; set; }
 
-        public Sudoku() { }
+        public Sudoku(List<List<int>> numbers) { 
+            if(Validate(numbers)) Numbers = numbers;
+        }
 
         public static bool ValidateRow(List<int> r)
         {
-            List<int> row = new List<int>();
-            foreach(var o in r)
-            {
-                row.Add(o);
-            }
-            if(row.Count != 9) return false;
-            for(int i  = 0; i < row.Count; i++)
-            {
-                if (row[i] == 0) row.RemoveAt(i);
-            }
+            if (r.Count != 9) return false;
 
-            if(row.Equals(row.Distinct())) return true;
+            List<int> row = new List<int>();
+            for (int i = 0; i < r.Count; i++)
+            {
+                if (r[i] != 0) row.Add(r[i]);
+            }
+            if(row.Count.Equals(row.Distinct().Count())) return true;
+            
             return false;
         }
 
@@ -37,8 +37,7 @@ namespace Sudoku
             {
                 if(!ValidateRow(i)) return false;
             }
-
-            for(int i = 0; i < numbers.Count; i++)
+            for (int i = 0; i < numbers.Count; i++)
             {
                 List<int> list = new List<int>();
                 for(int e = 0; e < numbers.Count; e++)
@@ -47,8 +46,7 @@ namespace Sudoku
                 }
                 if(!ValidateRow(list)) return false;
             }
-
-            for(int a = 0; a < 3; a++)
+            for (int a = 0; a < 3; a++)
             {
                 for(int b = 0; b < 3; b++)
                 {
@@ -73,7 +71,26 @@ namespace Sudoku
             {
                 string content = File.ReadAllText(filename);
                 var lines = content.Split('\n');
-
+                List<List<int>> numbers = new List<List<int>>();
+                foreach(string line in lines)
+                {
+                    List<int> l = new List<int>();
+                    string[] c = line.Split(" ");
+                    foreach(var x in c)
+                    {
+                        if(x.Trim() == "X")
+                        {
+                            l.Add(0);
+                        }
+                        else
+                        {
+                            if (Regex.IsMatch(x, @"^[0-9xX]$")) l.Add(int.Parse(x.Trim()));
+                            else l.Add(0);
+                        }
+                    }
+                    numbers.Add(l);
+                }
+                return numbers;
             }
             else
             {
@@ -92,6 +109,30 @@ namespace Sudoku
             }
 
             return kopie;
+        }
+
+        public void PrintNumbers()
+        {
+            foreach(var v in Numbers)
+            {
+                foreach (var n in v)
+                {
+                    Console.Write(n + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void PrintNumbers(List<List<int>> num)
+        {
+            foreach (var v in num)
+            {
+                foreach (var n in v)
+                {
+                    Console.Write(n + " ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
