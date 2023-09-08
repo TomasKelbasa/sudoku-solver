@@ -12,8 +12,9 @@ namespace Sudoku
 
         public List<List<int>> Numbers { get; set; }
 
-        public Sudoku(List<List<int>> numbers) { 
-            if(Validate(numbers)) Numbers = numbers;
+        public Sudoku(List<List<int>> numbers) {
+            if (Validate(numbers)) Numbers = numbers;
+            else throw new Exception("Neplatné sudoku");
         }
 
         public static bool ValidateRow(List<int> r)

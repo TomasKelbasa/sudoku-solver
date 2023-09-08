@@ -18,7 +18,7 @@ if (args.Length > 0)
 
 
 Sudoku.Sudoku s = new Sudoku.Sudoku(Sudoku.Sudoku.GetSudokuFromFile(defaultFilePath));
-s.PrintNumbers();
+//s.PrintNumbers();
 
 var start = DateTime.Now;
 s.Solve();
