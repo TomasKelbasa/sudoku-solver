@@ -84,7 +84,7 @@ namespace Sudoku
                         }
                         else
                         {
-                            if (Regex.IsMatch(x, @"^[0-9xX]$")) l.Add(int.Parse(x.Trim()));
+                            if (Regex.IsMatch(x.Trim(), @"^[0-9xX]$")) l.Add(int.Parse(x.Trim()));
                             else l.Add(0);
                         }
                     }
@@ -96,6 +96,54 @@ namespace Sudoku
             {
                 throw new FileNotFoundException(filename);
             }
+        }
+
+        public bool Solve()
+        {
+            int zeroCount = Numbers.SelectMany(row => row).Count(value => value == 0);
+            List<int> unknown = new List<int>();
+            for(int i = 0; i < zeroCount; i++)
+            {
+                unknown.Add(0);
+            }
+            int current = 0;
+            while (true)
+            {
+                if (++unknown[current] > 9)
+                {
+                    unknown[current] = 0;
+                    current--;
+                }
+                else
+                {
+                    var NumCopy = DeepClone(Numbers);
+                    int ix = 0;
+                    for(int i = 0; i < NumCopy.Count; i++)
+                    {
+                        for(int j = 0; j < NumCopy[i].Count; j++)
+                        {
+                            if (NumCopy[i][j] == 0)
+                            {
+                                NumCopy[i][j] = unknown[ix++];
+                            }
+                        }
+                    }
+
+                    if (Validate(NumCopy))
+                    {
+                        if(NumCopy.SelectMany(row => row).Count(value => value == 0) == 0)
+                        {
+                            Numbers = NumCopy;
+                            return true;
+                        }
+                        else
+                        {
+                            current++;
+                        }
+                    }
+                }
+            }
+
         }
 
         static List<List<int>> DeepClone(List<List<int>> original)
