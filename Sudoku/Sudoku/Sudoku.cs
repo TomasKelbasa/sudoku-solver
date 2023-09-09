@@ -14,19 +14,16 @@ namespace Sudoku
 
         public Sudoku(List<List<int>> numbers) {
             if (Validate(numbers)) Numbers = numbers;
-            else throw new Exception("Neplatné sudoku");
+            else throw new Exception("Invalid numbers");
         }
 
         public static bool ValidateRow(List<int> r)
         {
             if (r.Count != 9) return false;
 
-            List<int> row = new List<int>();
-            for (int i = 0; i < r.Count; i++)
-            {
-                if (r[i] != 0) row.Add(r[i]);
-            }
-            if(row.Count.Equals(row.Distinct().Count())) return true;
+            List<int> row = r.Where(x => x != 0).ToList();
+
+            if (row.Count.Equals(row.Distinct().Count())) return true;
             
             return false;
         }
@@ -79,13 +76,14 @@ namespace Sudoku
                     string[] c = line.Split(" ");
                     foreach(var x in c)
                     {
-                        if(x.Trim() == "X")
+                        var u = x.Trim();
+                        if(u == "X")
                         {
                             l.Add(0);
                         }
                         else
                         {
-                            if (Regex.IsMatch(x.Trim(), @"^[0-9xX]$")) l.Add(int.Parse(x.Trim()));
+                            if (Regex.IsMatch(u, @"^[0-9]$")) l.Add(int.Parse(u));
                             else l.Add(0);
                         }
                     }
@@ -133,16 +131,14 @@ namespace Sudoku
 
                     if (Validate(NumCopy))
                     {
-                        if(NumCopy.SelectMany(row => row).Count(value => value == 0) == 0)
+                        if(!NumCopy.SelectMany(row => row).Contains(0))
                         {
                             Numbers = NumCopy;
                             Console.WriteLine("\nNumber of itterations: " + itterations);
                             return true;
                         }
-                        else
-                        {
-                            current++;
-                        }
+                        current++;
+                        
                     }
                 }
             }

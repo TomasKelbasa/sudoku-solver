@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Sudoku;
 
-string defaultFilePath = @"C:\Users\tomas\Desktop\Hard sudoku.txt";
+string defaultFilePath = @"C:\Users\tomas\Desktop\Sudoku_example.txt";
 
 if (args.Length > 0)
 {
@@ -18,7 +18,7 @@ if (args.Length > 0)
 
 
 Sudoku.Sudoku s = new Sudoku.Sudoku(Sudoku.Sudoku.GetSudokuFromFile(defaultFilePath));
-//s.PrintNumbers();
+s.PrintNumbers();
 
 var start = DateTime.Now;
 s.Solve();
