@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9efn4euMadHlj9sd+baaXyj56+LcgzDtRAHARzQdWtMinH2pTLGMPRzpiLLxTE9PxquH+ZYz9RhWuJoc17gvAQ==",
+  "dgSpecHash": "fffyJcydeanA+VpQh3fBgZMB9Rj2Fk/mDCBAHSztEG19e1OBd8Ht2U2aKnWAZOKz8IiVokDPelt+XvQIryLakA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tomas\\Source\\Repos\\sudoku-solver\\Sudoku\\Sudoku\\Sudoku.csproj",
+  "projectFilePath": "C:\\Users\\tomas\\source\\repos\\sudoku-solver\\Sudoku\\Sudoku\\Sudoku.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

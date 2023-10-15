@@ -5,6 +5,7 @@ using Sudoku;
 // Old time for 50 sudoku: 53839,2957 ms
 // New time for 50 sudoku: 42987,1667 ms
 // Final time: 41929,3791 ms
+// New final time (validation change): 20437,4166 ms
 
 List<Sudoku.Sudoku> sudokuList = new List<Sudoku.Sudoku>();
 
@@ -39,7 +40,6 @@ foreach (var sud in sudokuList)
     sud.Solve();
     sud.PrintNumbers();
 }
-
 
 var finish = DateTime.Now;
 Console.WriteLine("\nFinished in: " + (finish - start).TotalMilliseconds + " ms");

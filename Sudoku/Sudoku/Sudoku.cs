@@ -19,34 +19,39 @@ namespace Sudoku
 
         public static bool Validate(List<List<int>> num)
         {
-            for (int i = 0; i < num.Count; i++)
+            bool result = true;
+            for(int e = 0; e < 3; e++)
             {
-                List<int> row = new List<int>();
-                List<int> col = new List<int>();
-                for(int e = 0; e < num[i].Count; e++)
+                for(int t = 0; t < 3; t++)
                 {
-                    if (row.Contains(num[i][e]) || col.Contains(num[e][i])) return false;
-                    if(num[i][e] > 0) row.Add(num[i][e]);
-                    if(num[e][i] > 0) col.Add(num[e][i]);
-                };
-            }
-            for (int a = 0; a < 3; a++)
-            {
-                for(int b = 0; b < 3; b++)
-                {
-                    List<int> ints = new List<int>();
-                    for(int x =  0; x < 3; x++)
-                    {
-                        for(int y = 0; y < 3; y++)
-                        {
-                            int n = num[a * 3 + x][b * 3 + y];
-                            if (ints.Contains(n)) return false;
-                            else if(n > 0) ints.Add(n);
-                        }
-                    }
+                    result &= Validate(num, t * 3 + e, e*3 + t);
                 }
             }
 
+            return result;
+        }
+
+        public static bool Validate(List<List<int>> l, int x, int y)
+        {
+            List<int> r = new List<int>();
+            List<int> c = new List<int>();
+            for (int i = 0; i < 9; i++)
+            {
+                if (r.Contains(l[i][y]) || c.Contains(l[x][i])) return false;
+                if (l[i][y] > 0) r.Add(l[i][y]);
+                if (l[x][i] > 0) c.Add(l[x][i]);
+            }
+
+            List<int> s = new List<int>();
+            for (int a = 0; a < 3; a++)
+            {
+                for (int b = 0; b < 3; b++)
+                {
+                    int n = l[(x - x%3) + a][(y - y%3) + b];
+                    if (s.Contains(n)) return false;
+                    else if (n > 0) s.Add(n);
+                }
+            }
             return true;
         }
 
@@ -105,18 +110,24 @@ namespace Sudoku
                 {
                     var NumCopy = DeepClone(Numbers);
                     int ix = 0;
+                    int a = 0;
+                    int b = 0;
                     for(int i = 0; i < NumCopy.Count; i++)
                     {
                         for(int j = 0; j < NumCopy[i].Count; j++)
                         {
                             if (NumCopy[i][j] == 0)
                             {
+                                if (unknown[ix] != 0)
+                                {
+                                    a = i;
+                                    b = j;
+                                }
                                 NumCopy[i][j] = unknown[ix++];
                             }
                         }
                     }
-                    
-                    if (Validate(NumCopy))
+                    if (Validate(NumCopy, a, b))
                     {
                         if(!NumCopy.SelectMany(row => row).Contains(0))
                         {
