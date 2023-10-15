@@ -10,7 +10,7 @@ namespace Sudoku
     internal class Sudoku
     {
 
-        public List<List<int>> Numbers { get; set; }
+        public List<List<int>> Numbers { get; private set; }
 
         public Sudoku(List<List<int>> numbers) {
             if (Validate(numbers)) Numbers = numbers;
@@ -92,11 +92,10 @@ namespace Sudoku
         public bool Solve()
         {
             int zeroCount = Numbers.SelectMany(row => row).Count(value => value == 0);
+
             List<int> unknown = new List<int>();
-            for(int i = 0; i < zeroCount; i++)
-            {
-                unknown.Add(0);
-            }
+            for(int i = 0; i < zeroCount; i++) unknown.Add(0);
+            
             int current = 0;
             int itterations = 0;
             while (true)
@@ -145,15 +144,9 @@ namespace Sudoku
 
         static List<List<int>> DeepClone(List<List<int>> original)
         {
-            List<List<int>> kopie = new List<List<int>>();
 
-            foreach (List<int> podseznam in original)
-            {
-                List<int> kopiePodseznamu = new List<int>(podseznam);
-                kopie.Add(kopiePodseznamu);
-            }
+            return original.Select(a => new List<int>(a)).ToList();
 
-            return kopie;
         }
 
         public static void PrintNumbers(List<List<int>> num)
