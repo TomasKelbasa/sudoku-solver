@@ -3,7 +3,6 @@ C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\bin\Debug\net6.0\Sudoku.
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\bin\Debug\net6.0\Sudoku.runtimeconfig.json
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\bin\Debug\net6.0\Sudoku.dll
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\bin\Debug\net6.0\Sudoku.pdb
-C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.csproj.AssemblyReference.cache
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.AssemblyInfoInputs.cache
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.AssemblyInfo.cs
@@ -13,3 +12,4 @@ C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\refint\
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.pdb
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\Sudoku.genruntimeconfig.cache
 C:\Users\tomas\source\repos\sudoku-solver\Sudoku\Sudoku\obj\Debug\net6.0\ref\Sudoku.dll
+C:\Users\tomas\Source\Repos\sudoku-solver\Sudoku\Sudoku\bin\Debug\net6.0\sudoku.txt

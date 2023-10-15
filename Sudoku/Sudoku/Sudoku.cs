@@ -17,6 +17,8 @@ namespace Sudoku
             else throw new Exception("Invalid numbers");
         }
 
+        public Sudoku() { }
+
         public static bool ValidateRow(List<int> r)
         {
             if (r.Count != 9) return false;

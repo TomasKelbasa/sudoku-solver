@@ -1,29 +1,46 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Sudoku;
 
-string defaultFilePath = @"C:\Users\tomas\Desktop\Sudoku_example.txt";
 
-if (args.Length > 0)
+// Old time for 50 sudoku: 53839,2957 ms
+// New time for 50 sudoku: 
+
+List<Sudoku.Sudoku> sudokuList = new List<Sudoku.Sudoku>();
+
+using (StreamReader sr = new StreamReader("./sudoku.txt"))
 {
-    if (File.Exists(args[0]))
+    string line = "";
+    Sudoku.Sudoku s = new Sudoku.Sudoku();
+    List<List<int>> nums = new List<List<int>>();
+    do
     {
-        defaultFilePath = args[0];
-    }
-    else
-    {
-        Console.WriteLine("File not found, proceeding with default file");
-    }
+        line = sr.ReadLine();
+        if (line[0] != 'G')
+        {
+            nums.Add(line.ToCharArray().Select(a => a - 48).ToList());
+        }
+        else
+        {
+            s.Numbers = nums;
+            sudokuList.Add(s);
+            s = new Sudoku.Sudoku();
+            nums = new List<List<int>>();
+        }
+    } while (!sr.EndOfStream);
+}
 
+sudokuList.Remove(sudokuList[0]);
+
+
+var start = DateTime.Now;
+
+
+foreach (var sud in sudokuList)
+{
+    sud.Solve();
+    sud.PrintNumbers();
 }
 
 
-Sudoku.Sudoku s = new Sudoku.Sudoku(Sudoku.Sudoku.GetSudokuFromFile(defaultFilePath));
-s.PrintNumbers();
-
-var start = DateTime.Now;
-s.Solve();
 var finish = DateTime.Now;
 Console.WriteLine("\nFinished in: " + (finish - start).TotalMilliseconds + " ms");
-Console.WriteLine("Solved Sudoku: ");
-
-s.PrintNumbers();
