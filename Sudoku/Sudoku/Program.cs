@@ -3,15 +3,17 @@ using Sudoku;
 
 
 // Old time for 50 sudoku: 53839,2957 ms
-// New time for 50 sudoku: 
+// New time for 50 sudoku: 42987,1667 ms
+// Final time: 41929,3791 ms
 
 List<Sudoku.Sudoku> sudokuList = new List<Sudoku.Sudoku>();
 
 using (StreamReader sr = new StreamReader("./sudoku.txt"))
 {
     string line = "";
-    Sudoku.Sudoku s = new Sudoku.Sudoku();
     List<List<int>> nums = new List<List<int>>();
+    sr.ReadLine();
+
     do
     {
         line = sr.ReadLine();
@@ -21,15 +23,12 @@ using (StreamReader sr = new StreamReader("./sudoku.txt"))
         }
         else
         {
-            s.Numbers = nums;
-            sudokuList.Add(s);
-            s = new Sudoku.Sudoku();
+            sudokuList.Add(new Sudoku.Sudoku(nums));
             nums = new List<List<int>>();
         }
     } while (!sr.EndOfStream);
 }
 
-sudokuList.Remove(sudokuList[0]);
 
 
 var start = DateTime.Now;

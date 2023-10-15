@@ -17,34 +17,18 @@ namespace Sudoku
             else throw new Exception("Invalid numbers");
         }
 
-        public Sudoku() { }
-
-        public static bool ValidateRow(List<int> r)
-        {
-            if (r.Count != 9) return false;
-
-            List<int> row = r.Where(x => x != 0).ToList();
-
-            if (row.Count.Equals(row.Distinct().Count())) return true;
-            
-            return false;
-        }
-
         public static bool Validate(List<List<int>> num)
         {
-            List<List<int>> numbers = DeepClone(num);
-            foreach(var i in numbers)
+            for (int i = 0; i < num.Count; i++)
             {
-                if(!ValidateRow(i)) return false;
-            }
-            for (int i = 0; i < numbers.Count; i++)
-            {
-                List<int> list = new List<int>();
-                for(int e = 0; e < numbers.Count; e++)
+                List<int> row = new List<int>();
+                List<int> col = new List<int>();
+                for(int e = 0; e < num[i].Count; e++)
                 {
-                    list.Add(numbers[e][i]);
-                }
-                if(!ValidateRow(list)) return false;
+                    if (row.Contains(num[i][e]) || col.Contains(num[e][i])) return false;
+                    if(num[i][e] > 0) row.Add(num[i][e]);
+                    if(num[e][i] > 0) col.Add(num[e][i]);
+                };
             }
             for (int a = 0; a < 3; a++)
             {
@@ -55,10 +39,11 @@ namespace Sudoku
                     {
                         for(int y = 0; y < 3; y++)
                         {
-                            ints.Add(numbers[a * 3 + x][b * 3 + y]);
+                            int n = num[a * 3 + x][b * 3 + y];
+                            if (ints.Contains(n)) return false;
+                            else if(n > 0) ints.Add(n);
                         }
                     }
-                    if(!ValidateRow(ints)) return false;
                 }
             }
 
@@ -130,13 +115,13 @@ namespace Sudoku
                             }
                         }
                     }
-
+                    
                     if (Validate(NumCopy))
                     {
                         if(!NumCopy.SelectMany(row => row).Contains(0))
                         {
                             Numbers = NumCopy;
-                            Console.WriteLine("\nNumber of itterations: " + itterations);
+                            Console.WriteLine("\nNumber of itterations : " + itterations);
                             return true;
                         }
                         current++;
